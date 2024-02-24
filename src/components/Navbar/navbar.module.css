@@ -1,0 +1,70 @@
+.NavbarRoot {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #2E2E2E;
+    align-items: center;
+    flex-direction: column;
+
+    @media (max-width: 490px) {
+        flex-direction: column;
+    }
+
+    .LogoAndSearchBar {
+        width: 100%;
+        display: flex;
+        gap: 50px;
+        align-items: center;
+        justify-content: space-around;
+
+        @media (max-width: 800px) {
+            justify-content: center;
+        }
+
+        @media (max-width: 700px) {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    .Title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #FD7F20;
+        text-decoration: none;
+        &:hover {
+            color: #d95f02;
+        }
+    }
+
+
+    .Form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: space-between;
+
+        input {
+            padding: 10px;
+            background-color: transparent;
+            color: #FD7F20;
+            border: none;
+            outline: none;
+            font-size: 17px;
+        }
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #FD7F20;
+            color: #2E2E2E;
+            border: none;
+            font-size: 17px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    }
+}

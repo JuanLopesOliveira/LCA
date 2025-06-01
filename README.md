@@ -1,4 +1,4 @@
-Este é um projeto React e typescript para pesquisa de filmes e series usando a API do TMDB, e cadastro de usuários usando um back-end com NodeJS e banco de dados MySQL. Ainda em desenvolvimento e otimização
+Este é um projeto React e TypeScript para pesquisa de filmes e series usando a API do TMDB, e cadastro de usuários usando um back-end com NodeJS e banco de dados MySQL. Ainda em desenvolvimento e otimização
 
 1: Configure as suas variáveis ambiente seguindo o modelo em .env.example.
 
@@ -9,5 +9,3 @@ Este é um projeto React e typescript para pesquisa de filmes e series usando a 
 * npm run dev inicia o front-end
 * npm run server inicia o servidor NodeJS
 Atualizações em breve.
-=======
-Este é um projeto React e typescript para pesquisa de filmes e series usando a API do TMDB. Atualizações em breve.

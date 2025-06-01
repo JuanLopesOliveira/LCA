@@ -22,6 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
 server.crt
 server.key
+=======
+
+>>>>>>> c31e0de1390ac30764829db2cd82d048839763b7
 .env

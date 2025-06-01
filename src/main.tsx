@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import React from 'react'
+>>>>>>> c31e0de1390ac30764829db2cd82d048839763b7
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
@@ -8,6 +12,7 @@ import Search from './pages/Search/Search.tsx'
 import Movies from './pages/Movies/Movies.tsx'
 import Series from './pages/Series/Series.tsx'
 import Media from './pages/Media/Media.tsx'
+<<<<<<< HEAD
 import Login from './pages/Login/Login.tsx'
 import Register from './pages/Register/Register.tsx'
 import Favorite from './pages/Favorite/Favorite.tsx'
@@ -15,6 +20,11 @@ import { Profile } from './pages/Profile/Profile.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
+=======
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+>>>>>>> c31e0de1390ac30764829db2cd82d048839763b7
     <BrowserRouter>
       <Routes>
         <Route element={<App />} >
@@ -23,6 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path='search' element={<Search />} />
           <Route path='/movies' element={<Movies />} />
           <Route path='/series' element={<Series />} />
+<<<<<<< HEAD
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/favorite' element={<Favorite />} />
@@ -31,4 +42,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       </Routes>
     </BrowserRouter>
   // </React.StrictMode>,
+=======
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>,
+>>>>>>> c31e0de1390ac30764829db2cd82d048839763b7
 )

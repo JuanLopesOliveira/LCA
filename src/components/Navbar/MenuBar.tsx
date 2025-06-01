@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import styles from "./menuBar.module.css";
 import { useContext, useEffect, useState } from "react";
@@ -38,3 +39,19 @@ export default function MenuBar() {
     </div>
   );
 }
+=======
+import { Link } from 'react-router-dom'
+import styles from './menuBar.module.css'
+
+export default function MenuBar() {
+    return (
+        <div className={styles.MenuBarRoot}>
+            <ul className={styles.MenuList}>
+                <li><Link to="/">Início</Link></li>
+                <li><Link to="/movies">Filmes</Link></li>
+                <li><Link to="/series">Séries</Link></li>
+            </ul>
+        </div>
+    )
+}
+>>>>>>> c31e0de1390ac30764829db2cd82d048839763b7

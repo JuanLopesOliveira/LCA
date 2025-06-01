@@ -28,7 +28,12 @@
     }
 
     .MovieDetails {
+<<<<<<< HEAD
         height: 100%;
+=======
+        margin-bottom: 0;
+        width: 100%;
+>>>>>>> c31e0de1390ac30764829db2cd82d048839763b7
         padding: 5px;
         border-radius: 6px;
         background-color: #FD7F20;
@@ -42,9 +47,12 @@
         }
     }
 
+<<<<<<< HEAD
     .DetailsAndFavoriteButton {
         display: flex;
         gap: 10px;
         align-items: center;
     }
+=======
+>>>>>>> c31e0de1390ac30764829db2cd82d048839763b7
 }

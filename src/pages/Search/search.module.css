@@ -17,10 +17,13 @@
     h1 {
         height: fit-content;
     }
+<<<<<<< HEAD
 }
 
 .resultMessageAndModal {
     display: flex;
     flex-direction: column;
     align-items: center;
+=======
+>>>>>>> c31e0de1390ac30764829db2cd82d048839763b7
 }

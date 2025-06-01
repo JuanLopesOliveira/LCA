@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "Nunito";
+  src: url(./assets/fonts/Nunito/static/Nunito-ExtraLight.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito";
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: #3d3d3d;
+  color: white;
+}

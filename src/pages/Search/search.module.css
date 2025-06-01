@@ -1,0 +1,26 @@
+.SearchRoot {
+    text-align: center;
+    span {
+        color: #FD7F20;
+    }
+    margin-top: 15px;
+    margin-bottom: 40px;
+}
+
+.ListMovies {
+    margin: 10px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    h1 {
+        height: fit-content;
+    }
+}
+
+.resultMessageAndModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

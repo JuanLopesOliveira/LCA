@@ -1,0 +1,19 @@
+@font-face {
+  font-family: NunitoRegular;
+  src: url(../../assets/fonts/Nunito/static/Nunito-Regular.ttf);
+}
+
+.UnfavoriteButton {
+  background-color: #fd7f20;
+  padding: 5px;
+  border-radius: 6px;
+  font-size: 1rem;
+  border: 0;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: #bd5200;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+}

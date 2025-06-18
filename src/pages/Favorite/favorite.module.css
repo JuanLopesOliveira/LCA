@@ -1,0 +1,20 @@
+.MainFavoritePageDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.FavoritePageTitle {
+  padding: 10px;
+}
+
+.CardsDiv {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}

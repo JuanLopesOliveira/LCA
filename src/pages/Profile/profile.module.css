@@ -1,0 +1,125 @@
+.MainDivProfile {
+  height: 100vh;
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .errors {
+    color: red;
+  }
+
+  .input {
+    background-color: #5a5a5a;
+    width: 100%;
+    outline: none;
+    padding: 2px;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+  }
+
+  .Infos {
+    width: 25rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+  }
+
+  .Email {
+    display: flex;
+    align-items: center;
+    width: 50%;
+  }
+
+  .Name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    input {
+      width: 45%;
+    }
+  }
+
+  .Password {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    input {
+      width: 45%;
+    }
+  }
+
+  .NewPasssword {
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      width: 45%;
+    }
+  }
+
+  .ConfirmNewPassword {
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      width: 45%;
+    }
+  }
+
+  .Icon {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    font-size: x-large;
+  }
+
+  .ButtonsAndResponse {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .Buttons {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    justify-content: space-around;
+    gap: 10px;
+
+    button {
+      margin-top: 5px;
+      font-size: large;
+      width: fit-content;
+      padding: 3px 6px;
+      background-color: #fd7f20;
+      border: 0;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .disabled {
+      background-color: #bd5200;
+    }
+  }
+
+  .GREEN {
+    color: green;
+  }
+
+  .RED {
+    color: red;
+  }
+}

@@ -1,0 +1,33 @@
+.FavoriteButton {
+  height: 100%;
+  background-color: #fd7f20;
+  padding: 5px;
+  border-radius: 6px;
+  font-size: 1rem;
+  border: 0;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: #bd5200;
+    cursor: text;
+    transition: 0.5s;
+  }
+}
+
+.GREEN {
+  background-color: green;
+}
+
+.RED {
+  background-color: orangered;
+}
+
+.BLUE {
+  background-color: cornflowerblue;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}

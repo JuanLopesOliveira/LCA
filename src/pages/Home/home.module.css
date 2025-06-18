@@ -1,0 +1,36 @@
+@font-face {
+  font-family: NunitoRegular;
+  src: url(../../assets/fonts/Nunito/static/Nunito-Regular.ttf);
+}
+
+.HomeRoot {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 40px;
+
+  a {
+    text-decoration: none;
+    color: black;
+    font-family: NunitoRegular;
+  }
+
+  button {
+    padding: 3px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fd7f20;
+    cursor: pointer;
+  }
+}
+
+.ListMovies {
+  margin: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  h1 {
+    height: fit-content;
+  }
+}

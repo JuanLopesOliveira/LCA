@@ -1,0 +1,13 @@
+.SeriesRoot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ListMovies {
+    margin: 10px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}

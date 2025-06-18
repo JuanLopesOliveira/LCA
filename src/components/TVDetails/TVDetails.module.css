@@ -1,0 +1,100 @@
+.MovieDetailsRoot {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  .BannerDiv {
+    height: 60vh;
+    width: 100vw;
+    z-index: -1;
+
+    img {
+      -webkit-filter: brightness(40%);
+      width: 100%;
+      height: 35rem;
+      object-fit: cover;
+    }
+  }
+
+  .Details {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    align-items: center;
+    margin-top: -15%;
+
+    @media (max-width: 1600px) {
+      margin-top: -27%;
+    }
+
+    @media (max-width: 1400px) {
+      margin-top: -25%;
+    }
+
+    @media (max-width: 1000px) {
+      margin-top: -40%;
+    }
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      margin-top: -43%;
+    }
+
+    @media (max-width: 700px) {
+      margin-top: -55%;
+    }
+
+    @media (max-width: 500px) {
+      margin-top: -60%;
+    }
+
+    @media (max-width: 450px) {
+      margin-top: -80%;
+    }
+
+    @media (max-width: 400px) {
+      margin-top: -90%;
+    }
+
+    .PosterImage {
+      img {
+        width: 400px;
+        margin-top: 4rem;
+      }
+
+      @media (max-width: 480px) {
+        img {
+          width: 350px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        img {
+          width: 300px;
+        }
+      }
+    }
+
+    .mediaDetails {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  .OtherMovieInformation {
+    width: 80%;
+    margin-top: 2rem;
+
+    .LastAndNextEpisodeToAir {
+      line-height: normal;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}

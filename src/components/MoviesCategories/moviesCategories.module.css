@@ -1,0 +1,67 @@
+@font-face {
+  font-family: NunitoRegular;
+  src: url(../../assets/fonts/Nunito/static/Nunito-Regular.ttf);
+}
+
+.MoviesCategories {
+  width: auto;
+
+  @media (max-width: 415px) {
+    display: flex;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .List {
+    list-style-type: none;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 415px) {
+      width: 50%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0;
+      margin: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    li {
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      height: 2.3rem;
+      width: 5rem;
+      border: none;
+      border-radius: 5px;
+      font-family: NunitoRegular;
+      cursor: pointer;
+    }
+
+    .nonActiveButton {
+      background-color: #fd7f20;
+      color: black;
+
+      &:hover {
+        background-color: #c05402;
+      }
+    }
+
+    .activeButton {
+      background-color: #ffffff;
+      color: #708ca0;
+
+      &:hover {
+        background-color: #c0c0d0;
+        color: #ffffff;
+      }
+    }
+  }
+}

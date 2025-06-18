@@ -1,0 +1,20 @@
+.PopUpModal {
+  font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.BLUE {
+  background-color: cornflowerblue;
+}
+
+.GREEN {
+  background-color: green;
+}
+
+.hidden {
+  display: none;
+  height: 0;
+  width: 0;
+}

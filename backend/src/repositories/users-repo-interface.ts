@@ -12,5 +12,5 @@ export interface UsersRepoInterface {
   getUserByEmail(userEmail: string): Promise<any>;
   getUserByID(userID: string): Promise<any>;
   updateUser({ userID, username, password }: updateUserSchema): Promise<any>;
-  deleteUser(userEmail: string): Promise<any>;
+  deleteUser(userEmail: string, userID: string): Promise<boolean>;
 }

@@ -71,7 +71,7 @@ export class MysqlUsersRepository implements UsersRepoInterface {
     userID,
     username,
     password,
-  }: UpdateUserSchema): Promise<any> {
+  }: UpdateUserSchema): Promise<boolean> {
     try {
       const connection = await this.database.connect();
       const query = "UPDATE users SET userName = ?, password = ? WHERE id = ?";
@@ -81,7 +81,7 @@ export class MysqlUsersRepository implements UsersRepoInterface {
         userID,
       ]);
 
-      return result.affectedRows > 0 ? true : false;
+      return result.affectedRows > 0;
     } catch (err) {
       throw new Error(`From DBRepo: ${err.message}`);
     } finally {
@@ -89,5 +89,24 @@ export class MysqlUsersRepository implements UsersRepoInterface {
     }
   }
 
-  async deleteUser() {}
+  async deleteUser(userEmail: string, userID: string): Promise<boolean> {
+    try {
+      const connection = await this.database.connect();
+      const query =
+        "UPDATE users SET active = 0, email = " +
+        "CONCAT(email, '__deleted__', id) WHERE email = ?";
+      const [result] = await connection.execute<ResultSetHeader>(query, [
+        userEmail,
+        userID,
+      ]);
+
+      console.log(result)
+      return result.affectedRows > 0;
+    } catch (err: any) {
+      console.log(err)
+      throw new Error(`From DBRepo: ${err.message}`);
+    } finally {
+      this.database.disconnect();
+    }
+  }
 }

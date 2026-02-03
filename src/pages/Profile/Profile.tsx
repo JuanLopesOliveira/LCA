@@ -3,6 +3,7 @@ import styles from "./profile.module.css";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import DeleteProfileButton from "../../components/DeleteUserButton/DeleteUserButton";
 
 export function Profile() {
   function handleChangeEditMode() {
@@ -209,6 +210,8 @@ export function Profile() {
                   >
                     Salvar
                   </button>
+
+                  <DeleteProfileButton/>
                 </div>
                 <h4
                   className={styles[responseFromServerAfterUpdate.messageColor]}

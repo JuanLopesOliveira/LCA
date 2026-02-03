@@ -4,14 +4,15 @@ import { z } from "zod";
 import styles from "./register.module.css";
 import { useState } from "react";
 
-export default function Register() {
-  const userSchema = z.object({
-    username: z.string().min(5, "Mínimo de 5 caracteres"),
-    email: z.string().email("E-mail é obrigatório!"),
-    password: z.string().min(6, "Mínimo de 6 caracteres!"),
-  });
+const userSchema = z.object({
+  username: z.string().min(5, "Mínimo de 5 caracteres"),
+  email: z.string().email("E-mail é obrigatório!"),
+  password: z.string().min(6, "Mínimo de 6 caracteres!"),
+});
 
-  type UserSchema = z.infer<typeof userSchema>;
+type UserSchema = z.infer<typeof userSchema>;
+
+export default function Register() {
 
   const {
     register,

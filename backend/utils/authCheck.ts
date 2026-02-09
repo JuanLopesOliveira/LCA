@@ -1,6 +1,8 @@
-import { IncomingMessage, ServerResponse } from "http";
-import jwt from "jsonwebtoken";
-import { env } from "../../@env/env";
+/* eslint-disable no-useless-catch */
+import { IncomingMessage, ServerResponse } from 'http';
+import jwt from 'jsonwebtoken';
+import { env } from '../../@env/env';
+import { UnautorizedError } from '../../errors/unauthorized';
 
 interface JwtVerifyResult {
   userID: string;
@@ -11,10 +13,8 @@ interface JwtVerifyResult {
 export default async function authCheck(
   request: IncomingMessage,
   response: ServerResponse,
-  shouldRequestBeEnded: boolean = true
+  shouldRequestBeEnded: boolean = true,
 ): Promise<boolean | undefined> {
-  console.log("entrou no authcheck");
-
   function verifyToken(token: string) {
     try {
       const tokenDecoded = jwt.verify(token, env.JWT_SECRET);
@@ -30,49 +30,52 @@ export default async function authCheck(
     }
   }
 
+  if (request.headers.cookie == '' || !request.headers.cookie) {
+    throw new UnautorizedError();
+  }
+
   //recovering the tokens from cookies
-  let accessTokenCookie: string = "";
-  let refreshTokenCookie: string = "";
+  let accessTokenCookie: string = '';
+  let refreshTokenCookie: string = '';
 
   /**
    * Here, i check what cookies exists to format correctly
    */
 
-  if (!request.headers.cookie?.includes("refreshToken")) {
-    console.log("AuthCheck: refresh cookie não existe");
+  if (!request.headers.cookie?.includes('refreshToken')) {
+    console.log('AuthCheck: refresh cookie não existe');
     response.statusCode = 401;
-    response.end(JSON.stringify({ message: "Faça login novamente!" }));
+    response.end(JSON.stringify({ message: 'Faça login novamente!' }));
     return false;
   }
 
-  if (!request.headers.cookie.includes("accessToken")) {
-    console.log("AuthCheck: acccess cookie não existe");
-    refreshTokenCookie = request.headers.cookie?.split("refreshToken=")[1];
+  if (!request.headers.cookie.includes('accessToken')) {
+    console.log('AuthCheck: acccess cookie não existe');
+    refreshTokenCookie = request.headers.cookie?.split('refreshToken=')[1];
   } else {
-    console.log("AuthCheck: access cookie existe");
+    console.log('AuthCheck: access cookie existe');
     accessTokenCookie = request.headers.cookie
-      ?.split(";")[0]
-      .split("accessToken=")[1];
+      ?.split(';')[0]
+      .split('accessToken=')[1];
 
     refreshTokenCookie = request.headers.cookie
-      ?.split(";")[1]
-      .split("refreshToken=")[1];
+      ?.split(';')[1]
+      .split('refreshToken=')[1];
   }
 
   try {
     const doesAccessTokenStillValid = verifyToken(accessTokenCookie);
-
     const doesRefreshTokenStillValid = verifyToken(refreshTokenCookie);
 
     if (doesRefreshTokenStillValid.error != null) {
-      console.log("Refresh é inválido");
+      console.log('Refresh é inválido');
       response.statusCode = 401;
-      response.end(JSON.stringify({ message: "Faça login novamente!" }));
+      response.end(JSON.stringify({ message: 'Faça login novamente!' }));
       return false;
     }
 
     if (!doesAccessTokenStillValid.error) {
-      console.log("Access ainda é válido");
+      console.log('Access ainda é válido');
       if (shouldRequestBeEnded) {
         response.statusCode = 200;
         response.end();
@@ -80,22 +83,22 @@ export default async function authCheck(
       return true;
     }
 
-    if (doesAccessTokenStillValid.error !== "TokenExpiredError") {
-      console.log("Access é inválido por algum motivo");
+    if (doesAccessTokenStillValid.error !== 'TokenExpiredError') {
+      console.log('Access é inválido por algum motivo');
       response.statusCode = 401;
-      response.end(JSON.stringify({ message: "Faça login novamente!" }));
+      response.end(JSON.stringify({ message: 'Faça login novamente!' }));
       return false;
     }
 
-    if (doesAccessTokenStillValid.error === "TokenExpiredError") {
-      console.log("Access é válido, mas expirou. Gerando novo");
+    if (doesAccessTokenStillValid.error === 'TokenExpiredError') {
+      console.log('Access é válido, mas expirou. Gerando novo');
 
       const refreshedAccessToken: string = jwt.sign(
         {
           userID: doesRefreshTokenStillValid.decoded?.userID,
         },
         env.JWT_SECRET,
-        { expiresIn: "15s" }
+        { expiresIn: '15s' },
       );
 
       const refreshedRefreshToken: string = jwt.sign(
@@ -103,10 +106,10 @@ export default async function authCheck(
           userID: doesRefreshTokenStillValid.decoded?.userID,
         },
         env.JWT_SECRET,
-        { expiresIn: "25s" }
+        { expiresIn: '25s' },
       );
 
-      response.setHeader("Set-Cookie", [
+      response.setHeader('Set-Cookie', [
         `accessToken=${refreshedAccessToken}; Path=/`,
         `refreshToken=${refreshedRefreshToken}; Path=/`,
       ]);

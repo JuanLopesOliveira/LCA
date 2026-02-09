@@ -1,5 +1,5 @@
 import styles from "./login.module.css";
-import { any, z } from "zod";
+import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
@@ -39,7 +39,7 @@ export default function Login() {
       if (response.ok) {
         window.location.href = "/";
       }
-    } catch (err: any) {
+    } catch (err) {
       setServerResponse({
         status: 500,
         message: err.message || "Internal Server Error",

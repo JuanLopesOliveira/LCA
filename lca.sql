@@ -1,4 +1,4 @@
-CREATE DATABASE `lca`
+CREATE DATABASE `lca`;
 
 USE `lca`;
 

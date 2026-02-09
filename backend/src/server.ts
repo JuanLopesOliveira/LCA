@@ -13,22 +13,22 @@ const options = {
   cert: fs.readFileSync("server.crt"),
 };
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "https://localhost:5173",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  "Access-Control-Allow-Credentials": "true",
+};
+
 const httpsServer = https.createServer(
   options,
   (request: IncomingMessage, response: ServerResponse) => {
-    response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-    response.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, PUT,PATCH, DELETE, OPTIONS"
-    );
-    response.setHeader(
-      "Access-Control-Allow-Headers",
-      "Content-Type, Authorization"
-    );
-    response.setHeader("Access-Control-Allow-Credentials", "true");
+    Object.entries(corsHeaders).forEach(([key, value]) => {
+      response.setHeader(key, value);
+    });
 
     if (request.method == "OPTIONS") {
-      response.writeHead(200);
+      response.writeHead(204);
       return response.end();
     }
 

@@ -3,8 +3,8 @@ import { UUID } from "crypto";
 export interface UserSchema {
   id: string;
   userName: string;
-  password: string;
   email: string;
+  password: string;
 }
 
 export interface UserInfo {

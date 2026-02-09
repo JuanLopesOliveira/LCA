@@ -1,8 +1,8 @@
 import { UUID } from "node:crypto";
 import { MysqlUsersRepository } from "../repositories/mysql/mysql-users-repository";
 import bcryptjs from "bcryptjs";
-import { IDDoNotExists } from "../../errors/id-do-not-exists";
-import { WrongPassword } from "../../errors/wrong-password";
+import { IDDoNotExists } from "../../../errors/id-do-not-exists";
+import { WrongPassword } from "../../../errors/wrong-password";
 
 interface EditedUserInfoRequest {
   userID: string;

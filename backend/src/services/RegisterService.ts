@@ -1,7 +1,8 @@
+/* eslint-disable no-useless-catch */
 import bcryptjs from "bcryptjs";
 import { UserSchema } from "../../utils/interfaces";
 import { MysqlUsersRepository } from "../repositories/mysql/mysql-users-repository";
-import { EmailAlreadyExists } from "../../errors/email-already-exists";
+import { EmailAlreadyExists } from "../../../errors/email-already-exists";
 import crypto from "node:crypto"
 
 interface RegisterServiceRequest {
@@ -11,7 +12,7 @@ interface RegisterServiceRequest {
 }
 
 interface RegisterServiceResponse {
-  success: boolean;
+  user: UserSchema | null;
 }
 
 export class RegisterService {
@@ -44,10 +45,11 @@ export class RegisterService {
         email,
       };
 
-      const createdUser = await this.UserRepository.createUser(newUser);
+      await this.UserRepository.createUser(newUser);
+      const userCreated = await this.UserRepository.getUserByEmail(email)
 
       return {
-        success: createdUser,
+        user: userCreated,
       };
     } catch (err) {
       throw err;

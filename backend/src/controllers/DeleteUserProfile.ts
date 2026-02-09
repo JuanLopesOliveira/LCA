@@ -10,13 +10,6 @@ export default function deleteProfileController(
   request: IncomingMessage,
   response: ServerResponse
 ) {
-  if (request.headers.cookie == "" || !request.headers.cookie) {
-    console.log("cookies não existem");
-    response.statusCode = 401;
-    response.setHeader("Content-Type", "application/json");
-    response.end(JSON.stringify({ message: "Não autorizado!" }));
-    return false;
-  }
 
   let body = "";
 

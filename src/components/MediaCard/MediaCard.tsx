@@ -1,11 +1,11 @@
-import { FaStar } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaStar } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const imageURL = import.meta.env.VITE_IMG;
 
-import styles from "./media.module.css";
-import FavoriteButton from "../FavoriteButton/FavoriteButton";
-import UnfavoriteButton from "../UnfavoriteButton/UnfavoriteButton";
+import styles from './media.module.css';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
+import UnfavoriteButton from '../UnfavoriteButton/UnfavoriteButton';
 
 interface MovieProps {
   id: number;
@@ -19,23 +19,27 @@ interface MovieProps {
 interface MovieCardProps {
   movie: MovieProps;
   showLink: boolean;
-  favoriteOrUnfavorite: "FAVORITE" | "UNFAVORITE";
+  favoriteOrUnfavorite: 'FAVORITE' | 'UNFAVORITE';
+  onUnfavorite: () => Promise<void>;
+  onError: (message: string) => void;
 }
 
 export default function MediaCard({
   movie,
   showLink = true,
-  favoriteOrUnfavorite = "FAVORITE",
+  favoriteOrUnfavorite = 'FAVORITE',
+  onUnfavorite,
+  onError
 }: MovieCardProps) {
   //"title" is a property that only movies have,
   // series (tv) have a "name" property
 
-  const isMovieOrSerie: any = movie.title ? "movie" : "serie";
+  const isMovieOrSerie: any = movie.title ? 'movie' : 'serie';
 
   return (
     <div className={styles.MovieRoot}>
       <img src={imageURL + movie.poster_path} alt={movie.title} />
-      <span>{isMovieOrSerie.includes("movie") ? movie.title : movie.name}</span>
+      <span>{isMovieOrSerie.includes('movie') ? movie.title : movie.name}</span>
 
       <p className={styles.VoteAverage}>
         <FaStar />
@@ -46,7 +50,7 @@ export default function MediaCard({
           <Link
             className={styles.MovieDetails}
             to={
-              isMovieOrSerie.includes("movie")
+              isMovieOrSerie.includes('movie')
                 ? `/movies/${movie.id}`
                 : `/tv/${movie.id}`
             }
@@ -54,12 +58,14 @@ export default function MediaCard({
             Detalhes
           </Link>
         )}
-        {favoriteOrUnfavorite == "FAVORITE" ? (
+        {favoriteOrUnfavorite == 'FAVORITE' ? (
           <FavoriteButton isMovieOrSerie={isMovieOrSerie} mediaID={movie.id} />
         ) : (
           <UnfavoriteButton
             isMovieOrSerie={isMovieOrSerie}
             mediaID={movie.id}
+            onSuccess={onUnfavorite}
+            onError={onError}
           />
         )}
       </div>

@@ -11,19 +11,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     const checkIfIsAuth = async () => {
       if (!document.cookie.includes("accessToken")) {
-        console.log("access não existe");
         setLogged(false);
         return false;
       }
 
       try {
-        console.log("verificando no servidor");
         const response = await fetch("https://localhost:3001/authCheck", {
           method: "GET",
           credentials: "include",
         });
 
-        console.log(response.ok);
         if (!response.ok) {
           setLogged(false);
           return false;
@@ -31,7 +28,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
         setLogged(response.ok);
       } catch (err) {
-        console.error(err);
         setLogged(false);
       }
     };

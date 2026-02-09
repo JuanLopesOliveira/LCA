@@ -62,6 +62,6 @@ export interface TVProps {
     status?: string;
     tagline?: string;
     type?: string;
-    vote_average: string;
-    vote_count: string;
+    vote_average: number;
+    vote_count: number;
 }

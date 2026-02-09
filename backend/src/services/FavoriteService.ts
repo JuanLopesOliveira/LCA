@@ -1,5 +1,5 @@
-import { MediaAlredyFavorited } from "../../errors/add-favorite-error";
-import { FavoritesRepoError } from "../../errors/favorites-error";
+import { MediaAlredyFavorited } from "../../../errors/add-favorite-error";
+import { FavoritesRepoError } from "../../../errors/favorites-error";
 import { MysqlFavoritesRepository } from "../repositories/mysql/mysql-favorites-repo";
 
 interface FavoriteServiceRequest {

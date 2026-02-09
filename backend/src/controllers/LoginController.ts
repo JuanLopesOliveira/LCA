@@ -4,7 +4,7 @@ import { MysqlUsersRepository } from "../repositories/mysql/mysql-users-reposito
 import { LoginService } from "../services/LoginService";
 import { env } from "../../../@env/env";
 import jwt from "jsonwebtoken";
-import { EmailOrPasswordIncorrect } from "../../errors/email-or-password-incorrect";
+import { EmailOrPasswordIncorrect } from "../../../errors/email-or-password-incorrect";
 
 export function LoginController(
   request: IncomingMessage,

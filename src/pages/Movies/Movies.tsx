@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import MediaCard from "../../components/MediaCard/MediaCard";
-import styles from "./movies.module.css";
-import Pagination from "../../components/Pagination/Pagination";
-import { useNavigate, useLocation } from "react-router-dom";
-import MoviesCategories from "../../components/MoviesCategories/MoviesCategories";
-import FavoritesPopUpModal from "../../components/PopUpModal/PopUpModal";
+import { useEffect, useState } from 'react';
+import MediaCard from '../../components/MediaCard/MediaCard';
+import styles from './movies.module.css';
+import Pagination from '../../components/Pagination/Pagination';
+import { useNavigate, useLocation } from 'react-router-dom';
+import MoviesCategories from '../../components/MoviesCategories/MoviesCategories';
+import FavoritesPopUpModal from '../../components/PopUpModal/PopUpModal';
 
 const movieBaseURL = import.meta.env.VITE_API_MOVIE;
 const apiKey = import.meta.env.VITE_API_KEY;
@@ -12,10 +12,10 @@ const apiKey = import.meta.env.VITE_API_KEY;
 export default function Movies() {
   const [movies, setMovies] = useState<any[]>([]);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState("popular");
+  const [selectedCategory, setSelectedCategory] = useState('popular');
   const [page, setPage] = useState(1);
 
-  const getMovies = async (url: any) => {
+  const getMovies = async (url: string) => {
     const response = await fetch(url);
     const data = await response.json();
     setMovies(data.results);
@@ -44,10 +44,10 @@ export default function Movies() {
   const location = useLocation();
   const navigatorLanguage = navigator.language;
   const urlParams = new URLSearchParams(location.search);
-  const categoryParam = urlParams.get("category") || "popular";
+  const categoryParam = urlParams.get('category') || 'popular';
 
   useEffect(() => {
-    const pageParam = parseInt(urlParams.get("page") || "1");
+    const pageParam = parseInt(urlParams.get('page') || '1');
     const movieURL =
       `${movieBaseURL}${selectedCategory}?api_key=${apiKey}` +
       `&language=${navigatorLanguage}&region=br&page=${page}`;
@@ -59,19 +59,26 @@ export default function Movies() {
 
   const getCategoryTitle = () => {
     switch (selectedCategory) {
-      case "popular":
-        return "Populares";
-      case "top_rated":
-        return "Melhores Avaliados";
-      case "upcoming":
-        return "Em breve";
-      case "now_playing":
-        return "Em exibição";
+      case 'popular':
+        return 'Populares';
+      case 'top_rated':
+        return 'Melhores Avaliados';
+      case 'upcoming':
+        return 'Em breve';
+      case 'now_playing':
+        return 'Em exibição';
     }
   };
 
   return (
     <div className={styles.MoviesRoot}>
+      <Pagination
+        decreasePage={handleDecreasePage}
+        increasePage={handleIncreasePage}
+        page={page}
+        totalPages={totalPages}
+      />
+
       <MoviesCategories
         onCategoryChange={handleCategoryChange}
         whatIsTheCategoryOnURL={categoryParam}

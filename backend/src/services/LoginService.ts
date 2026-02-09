@@ -1,5 +1,6 @@
+/* eslint-disable no-useless-catch */
 import { UUID } from "node:crypto";
-import { EmailOrPasswordIncorrect } from "../../errors/email-or-password-incorrect";
+import { EmailOrPasswordIncorrect } from "../../../errors/email-or-password-incorrect";
 import { UserSchema } from "../../utils/interfaces";
 import { MysqlUsersRepository } from "../repositories/mysql/mysql-users-repository";
 import bcryptjs from "bcryptjs";

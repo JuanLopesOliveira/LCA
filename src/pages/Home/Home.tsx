@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import MediaCard from "../../components/MediaCard/MediaCard";
-import styles from "./home.module.css";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import MediaCard from '../../components/MediaCard/MediaCard';
+import styles from './home.module.css';
+import { Link } from 'react-router-dom';
 
 const discoverAPI = import.meta.env.VITE_API_DISCOVER;
 const apiKey = import.meta.env.VITE_API_KEY;

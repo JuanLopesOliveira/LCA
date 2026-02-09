@@ -1,54 +1,55 @@
-import { IncomingMessage, ServerResponse } from "node:http";
-import authCheck from "../../utils/authCheck";
-import jwt from "jsonwebtoken";
-import { env } from "../../../@env/env";
-import { z } from "zod";
-import { UnfavortieService } from "../services/UnfavoriteService";
-import { MysqlFavoritesRepository } from "../repositories/mysql/mysql-favorites-repo";
+import { IncomingMessage, ServerResponse } from 'node:http';
+import authCheck from '../../utils/authCheck';
+import jwt from 'jsonwebtoken';
+import { env } from '../../../@env/env';
+import { z } from 'zod';
+import { UnfavortieService } from '../services/UnfavoriteService';
+import { MysqlFavoritesRepository } from '../repositories/mysql/mysql-favorites-repo';
+import { AlreadyUnfavoritedError } from '../../../errors/already-unfavorited';
 
 export default function unfavorite(
   request: IncomingMessage,
-  response: ServerResponse
+  response: ServerResponse,
 ) {
-  if (request.headers.cookie == "" || !request.headers.cookie) {
-    console.log("cookies não existem");
+  if (request.headers.cookie == '' || !request.headers.cookie) {
+    console.log('cookies não existem');
     response.statusCode = 401;
-    response.setHeader("Content-Type", "application/json");
-    response.end(JSON.stringify({ message: "Não autorizado!" }));
+    response.setHeader('Content-Type', 'application/json');
+    response.end(JSON.stringify({ message: 'Não autorizado!' }));
     return false;
   }
 
-  let body = "";
+  let body = '';
 
-  request.on("data", (chunk) => {
+  request.on('data', (chunk) => {
     body += chunk;
   });
 
-  request.on("end", async () => {
-    let refreshToken: any = "";
-    let userID: string = "";
+  request.on('end', async () => {
+    let refreshToken: any = '';
+    let userID: string = '';
 
     const tokenStillValidOrNewerWasGenerated = await authCheck(
       request,
       response,
-      false
+      false,
     );
 
     if (!tokenStillValidOrNewerWasGenerated) {
-      console.log("token não é válido");
+      console.log('token não é válido');
       response.statusCode = 401;
-      response.setHeader("Content-Type", "application/json");
-      response.end(JSON.stringify({ message: "Não autorizado!" }));
+      response.setHeader('Content-Type', 'application/json');
+      response.end(JSON.stringify({ message: 'Não autorizado!' }));
       return false;
     }
 
     refreshToken = request.headers.cookie
-      ?.split(";")[1]
-      ?.split("refreshToken=")[1];
+      ?.split(';')[1]
+      ?.split('refreshToken=')[1];
 
     const decoded = jwt.verify(refreshToken, env.JWT_SECRET);
 
-    if (typeof decoded === "object" && "userID" in decoded) {
+    if (typeof decoded === 'object' && 'userID' in decoded) {
       userID = decoded.userID;
     }
     try {
@@ -58,32 +59,35 @@ export default function unfavorite(
       });
 
       const unfavoriteMediaData = unfavoriteMediaBodySchema.parse(
-        JSON.parse(body)
+        JSON.parse(body),
       );
 
       const favoritesRepo = new MysqlFavoritesRepository();
       const unfavoriteService = new UnfavortieService(favoritesRepo);
 
-      const mediaToBeUnfavorited = await unfavoriteService.execute({
+      await unfavoriteService.execute({
         userID,
         mediaType: unfavoriteMediaData.mediaType,
         mediaID: unfavoriteMediaData.mediaID,
       });
 
-      if (!mediaToBeUnfavorited) {
-      }
-
-      response.statusCode = 200;
-      response.setHeader("Content-Type", "application/json");
-      response.end(JSON.stringify({ message: "Desfavoritado" }));
+      response.statusCode = 204;
+      response.setHeader('Content-Type', 'application/json');
+      response.end(JSON.stringify({ message: 'Desfavoritado' }));
     } catch (err) {
+      if (err instanceof AlreadyUnfavoritedError) {
+        response.statusCode = 404
+        response.setHeader('Content-Type', 'application/json');
+        response.end(JSON.stringify({ message: 'Já está desfavoritado' }));
+        return
+      }
       response.statusCode = 500;
-      response.setHeader("Content-Type", "application/json");
+      response.setHeader('Content-Type', 'application/json');
       response.end(
         JSON.stringify({
           message:
-            err instanceof Error ? `${err.message}` : "Falha no servidor",
-        })
+            err instanceof Error ? `${err.message}` : 'Falha no servidor',
+        }),
       );
     }
   });

@@ -1,4 +1,4 @@
-import { AlreadyUnfavoritedError } from "../../errors/already-unfavorited";
+import { AlreadyUnfavoritedError } from "../../../errors/already-unfavorited";
 import { MysqlFavoritesRepository } from "../repositories/mysql/mysql-favorites-repo";
 
 interface UnfavoriteServiceRequest {

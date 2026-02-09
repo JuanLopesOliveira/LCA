@@ -1,8 +1,8 @@
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { MysqlConnector } from "../../mysql/Connection";
 import { FavoritesRepoInterface } from "../favorites-repo-interface";
-import { FavoriteSchema, UserSchema } from "../../../utils/interfaces";
-import { FavoritesRepoError } from "../../../errors/favorites-error";
+import { FavoriteSchema } from "../../../utils/interfaces";
+import { FavoritesRepoError } from "../../../../errors/favorites-error";
 
 export class MysqlFavoritesRepository implements FavoritesRepoInterface {
   private database: MysqlConnector;
@@ -97,7 +97,6 @@ export class MysqlFavoritesRepository implements FavoritesRepoInterface {
         mediaType,
         mediaID,
       ]);
-
       return result.affectedRows > 0 ? true : false;
     } catch (err) {
       throw new Error(err.message);

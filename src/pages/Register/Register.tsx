@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -30,6 +31,7 @@ export default function Register() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
+        credentials: "include"
       });
 
       const result = await response.json();
@@ -40,7 +42,7 @@ export default function Register() {
       }
 
       setServerResponse({ status: response.status, message: result.success });
-      // window.location.href = "/login"
+      window.location.href = "/login"
     } catch (err) {
       throw err;
     }
